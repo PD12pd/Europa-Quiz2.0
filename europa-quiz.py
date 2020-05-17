@@ -1,5 +1,6 @@
 WIDTH = 1280
 HEIGHT = 720
+#höhe und breite des Fensters
 
 main_box = Rect(0, 0, 820, 240)
 timer_box = Rect(0, 0, 240, 240)
@@ -7,6 +8,7 @@ answer_box1 = Rect(0, 0, 495, 165)
 answer_box2 = Rect(0, 0, 495, 165)
 answer_box3 = Rect(0, 0, 495, 165)
 answer_box4 = Rect(0, 0, 495, 165)
+#hier werden die boxen gezeichnet
 
 main_box.move_ip(50, 40)
 timer_box.move_ip(990, 40)
@@ -15,9 +17,11 @@ answer_box2.move_ip(735, 358)
 answer_box3.move_ip(50, 538)
 answer_box4.move_ip(735, 538)
 answer_boxes = [answer_box1, answer_box2, answer_box3, answer_box4]
+#heir werden die Positionen der boxen bestimmt
 
 score = 0
 time_left = 10
+#hier werden Punktestand und Zeitstand bestimmt
 
 q1 = ["Welche Altersklasse bist du?",
       "Erwachsener", "Kind", "-", "-"]
@@ -78,9 +82,12 @@ q19 = ["Robin Hood kam aus ...?",
 
 q20 = ["König arthur war König von ...?",
        "Schottland", "Nord Irland", "England", "Wales", 3]
+#hier sind alle Fragen Aufgelistet
+
 
 questions = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15, q16, q17, q18, q19, q20]
-question = questions.pop(0)
+question = questions.pop(0)# hier wird die frage gezogen, und der variablen question zugeordnet, question hat dimension
+                           # 6 elementiger zeilenvektor
 
 def draw():
     screen.fill("dim grey")
@@ -97,7 +104,9 @@ def draw():
     for box in answer_boxes:
         screen.draw.textbox(question[index], box, color=("black"))
         index = index + 1
+#hier wird gezeichnet, das Programm zeichnet den text und die boxen und die Farben werden ausgesucht
 
+            
 def altersklasse():
     global altersklasse
     altersklasse = age.group  
@@ -106,12 +115,14 @@ def altersklasse():
                 screen.draw.questions[q1, q2, q3, q4, q5, q6, q7, q8, q9, q10]
           elif erwachsener.collidepoint(pos):
                 screen.draw.questions[q11, q12, q13, q14, q15, q16, q17, q18, q19, q20]
+#soll am Ende so funktionieren dass jemand sagt ob er erwachsen oder ein Kind ist
 
 def game_over():
     global question, time_left
     message = "Ende. Du hast %s Fragen richtig" % str(score)
     question = [message, "-", "-", "-", "-", 5]
     time_left = 0
+#game_over wird definiert und es wird eine Nachricht mit dem Punktestand angezeigt die Zeit ist dann auf Null
 
 def correct_answer():
     global question, score, time_left
@@ -124,6 +135,7 @@ def correct_answer():
     else:
         print("Das isch ja super gsi!")
         game_over()
+#hier wird correct_answer definiert und der score wird festgelegt
 
 def on_mouse_down(pos):
     index = 1
@@ -136,6 +148,7 @@ def on_mouse_down(pos):
             else:
                 game_over()
         index = index + 1
+#hier wird die Steuerung festgelegt
 
 def update_time_left():
     global time_left
@@ -146,3 +159,4 @@ def update_time_left():
         game_over()
 
 clock.schedule_interval(update_time_left, 1.0)
+#am Ende wird der Contdown programmiert und wenn die Zeit abgelaufen ist Ist game_over
